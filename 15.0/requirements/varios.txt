@@ -10,3 +10,4 @@ shapely
 geojson
 simplejson
 pandas
+psycopg2
