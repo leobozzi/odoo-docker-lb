@@ -14,7 +14,6 @@ RUN apt-get update && \
     dirmngr \
     fonts-noto-cjk \
     gnupg \
-    gsfonts \
     libssl-dev \
     node-less \
     npm \
@@ -23,7 +22,6 @@ RUN apt-get update && \
     python3-pip \
     python3-phonenumbers \
     python3-pyldap \
-    python3-openssl \
     python3-qrcode \
     python3-renderpm \
     python3-setuptools \
@@ -37,7 +35,6 @@ RUN apt-get update && \
     && echo 'ea8277df4297afc507c61122f3c349af142f31e5 wkhtmltox.deb' | sha1sum -c - \
     && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
     && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
-
 
 # install latest postgresql-client
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
@@ -58,10 +55,10 @@ RUN npm install -g rtlcss
 
 # Install Odoo
 ENV ODOO_VERSION 15.0
-ARG ODOO_RELEASE=20220407
-ARG ODOO_SHA=460e9c91ac6d5d8a9c22dffae95247cd8ed61d55
+ARG ODOO_RELEASE=20220425
+ARG ODOO_SHA=20dcece1bc2e25cf3950a419074b127dd7ef8c0f
 RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
-    # && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
+    && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
     && apt-get update \
     && apt-get -y install --no-install-recommends ./odoo.deb \
     && rm -rf /var/lib/apt/lists/* odoo.deb
@@ -69,9 +66,6 @@ RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/od
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
-
-# Set permissions
-RUN chown odoo /entrypoint.sh
 
 # Set permissions and Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
 RUN chown odoo /etc/odoo/odoo.conf \
@@ -86,6 +80,7 @@ EXPOSE 8069 8071 8072
 ENV ODOO_RC /etc/odoo/odoo.conf
 
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
+
 # Set permissions
 RUN chown odoo /usr/local/bin/wait-for-psql.py
 
@@ -143,6 +138,7 @@ RUN pip3 install -r /req/oca-web.txt
 RUN pip3 install -r /req/varios.txt
 RUN pip3 install -r /req/odoo-etl.txt
 RUN pip3 install -r /req/oca-partner-contact.txt
+RUN pip3 install -r /req/aeroo-reports.txt
 RUN rm -r /req
 
 # crear cache para pyafipws lo necesita para actualizar desde padron y darle

@@ -55,8 +55,8 @@ RUN npm install -g rtlcss
 
 # Install Odoo
 ENV ODOO_VERSION 14.0
-ARG ODOO_RELEASE=20220307
-ARG ODOO_SHA=4260081fc3a7712e6e2627289673ac586adedbd7
+ARG ODOO_RELEASE=20220401
+ARG ODOO_SHA=43eabf4f6f55cd2887dc123d955bfaf9c7f27a32
 RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
     && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
     && apt-get update \
@@ -137,7 +137,9 @@ RUN pip3 install -r /req/database-autobackup.txt
 RUN pip3 install -r /req/oca-rest-framework.txt
 RUN pip3 install -r /req/oca-server-tools.txt
 RUN pip3 install -r /req/oca-web.txt
-
+RUN pip3 install -r /req/varios.txt
+RUN pip3 install -r /req/odoo-etl.txt
+RUN pip3 install -r /req/oca-partner-contact.txt
 RUN rm -r /req
 
 # crear cache para pyafipws lo necesita para actualizar desde padron y darle
