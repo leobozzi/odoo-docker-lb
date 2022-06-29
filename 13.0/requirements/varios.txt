@@ -11,3 +11,11 @@ geojson
 simplejson
 pandas
 html2text
+cryptography
+endesive
+py3o.formats
+py3o.template
+genshi>=0.7
+xlsxwriter
+xlrd
+openpyxl

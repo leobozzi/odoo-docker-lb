@@ -139,6 +139,7 @@ RUN pip3 install -r /req/varios.txt
 RUN pip3 install -r /req/odoo-etl.txt
 RUN pip3 install -r /req/oca-partner-contact.txt
 RUN pip3 install -r /req/aeroo-reports.txt
+RUN pip3 install -r /req/ndm.txt
 RUN rm -r /req
 
 # crear cache para pyafipws lo necesita para actualizar desde padron y darle
