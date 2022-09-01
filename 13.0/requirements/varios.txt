@@ -18,4 +18,16 @@ py3o.template
 genshi>=0.7
 xlsxwriter
 xlrd
+acme
+astor
+cryptography
+dataclasses
+dnspython
+josepy
+lxml
+odoorpc
 openpyxl
+openupgradelib
+pysftp
+raven
+unidecode

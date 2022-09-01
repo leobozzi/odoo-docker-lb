@@ -29,6 +29,7 @@ RUN apt-get update \
     python3-watchdog \
     python3-xlrd \
     python3-xlwt \
+    python3-openpyxl \
     xz-utils \
     && curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.buster_amd64.deb \
     && echo 'ea8277df4297afc507c61122f3c349af142f31e5 wkhtmltox.deb' | sha1sum -c - \
@@ -54,8 +55,8 @@ RUN npm install -g rtlcss
 
 # Install Odoo
 ENV ODOO_VERSION 13.0
-ARG ODOO_RELEASE=20220429
-#ARG ODOO_SHA=f135b9d4967ef9221ff6aba58b1c4a3ea8334202
+ARG ODOO_RELEASE=20220901
+ARG ODOO_SHA=a65a2a194614d1e2bdbff169290876adcf0915b5
 RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
     #        && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
     && apt-get update \
