@@ -4,3 +4,5 @@ erppeek==1.7.1
 PyPDF2==1.26.0
 bokeh==1.1.0
 barcode
+aesencrypter
+openpyxl

@@ -55,8 +55,8 @@ RUN npm install -g rtlcss
 
 # Install Odoo
 ENV ODOO_VERSION 13.0
-ARG ODOO_RELEASE=20220901
-ARG ODOO_SHA=a65a2a194614d1e2bdbff169290876adcf0915b5
+ARG ODOO_RELEASE=20220914
+ARG ODOO_SHA=f955f54660dcb659131aa6e1b7f6fb66bf208a10
 RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
     #        && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
     && apt-get update \
@@ -134,6 +134,7 @@ COPY ./requirements /req
 RUN pip3 install -r /req/adhoc-odoo-argentina-ce.txt
 RUN pip3 install -r /req/adhoc-aeroo_reports.txt
 RUN pip3 install -r /req/database-autobackup.txt
+RUN pip3 install -r /req/oca-server-tools.txt
 RUN pip3 install -r /req/odoo-etl.txt
 RUN pip3 install -r /req/varios.txt
 RUN pip3 install -r /req/ndm.txt
